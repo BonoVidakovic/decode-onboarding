@@ -5,19 +5,17 @@ import decode.onboarding.tasks.backend.model.EventStatistics;
 import decode.onboarding.tasks.backend.service.EventService;
 import decode.onboarding.tasks.backend.service.EventStatisticsService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class EventStatisticsServiceImpl implements EventStatisticsService {
 
     private final EventService eventService;
-
-    public EventStatisticsServiceImpl(EventService eventService) {
-        this.eventService = eventService;
-    }
 
     @Override
     public EventStatistics getEventsStatistics(LocalDateTime from, LocalDateTime to) {
@@ -29,9 +27,9 @@ public class EventStatisticsServiceImpl implements EventStatisticsService {
         Duration periodDuration = Duration.between(from, to);
 
         return EventStatistics.builder()
-                .averageDuration(statisticsHelper.getTotalDuration().getSeconds() * 60D / statisticsHelper.getEventsCount())
+                .averageDuration(statisticsHelper.getTotalDuration().getSeconds() / 60D / statisticsHelper.getEventsCount())
                 .count(statisticsHelper.getEventsCount())
-                .hourUtilization((double) (statisticsHelper.getTotalDuration().getSeconds() / periodDuration.getSeconds()))
+                .hourUtilization((double) statisticsHelper.getTotalDuration().getSeconds() / periodDuration.getSeconds())
                 .build();
     }
 

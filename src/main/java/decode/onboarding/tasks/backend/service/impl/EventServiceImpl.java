@@ -1,14 +1,15 @@
 package decode.onboarding.tasks.backend.service.impl;
 
 import decode.onboarding.tasks.backend.exception.UnauthorizedAccessException;
-import decode.onboarding.tasks.backend.exception.UserNotFoundException;
 import decode.onboarding.tasks.backend.model.Event;
 import decode.onboarding.tasks.backend.model.User;
 import decode.onboarding.tasks.backend.repository.EventRepository;
 import decode.onboarding.tasks.backend.repository.UserRepository;
 import decode.onboarding.tasks.backend.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,15 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
-
-    public EventServiceImpl(EventRepository eventRepository, UserRepository userRepository) {
-        this.eventRepository = eventRepository;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public Event saveEvent(Event event) {
@@ -72,6 +69,6 @@ public class EventServiceImpl implements EventService {
         }
 
         return userRepository.getByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException(username));
+                .orElseThrow(() -> new UsernameNotFoundException("Couldn't fetch authenticated user: " + username + " from database"));
     }
 }

@@ -5,6 +5,7 @@ import decode.onboarding.tasks.backend.model.Event;
 import decode.onboarding.tasks.backend.model.EventStatistics;
 import decode.onboarding.tasks.backend.service.EventService;
 import decode.onboarding.tasks.backend.service.EventStatisticsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,15 +23,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("events")
+@RequiredArgsConstructor
 public class EventsController {
 
     private final EventService eventService;
     private final EventStatisticsService eventStatisticsService;
-
-    public EventsController(EventService eventService, EventStatisticsService eventStatisticsService) {
-        this.eventService = eventService;
-        this.eventStatisticsService = eventStatisticsService;
-    }
 
     @PostMapping
     public Event createEvent(Event event) {

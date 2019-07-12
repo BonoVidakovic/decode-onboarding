@@ -1,6 +1,9 @@
 package decode.onboarding.tasks.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +18,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "EVENT")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
@@ -30,7 +37,6 @@ public class Event {
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "owner")
     private User owner;
 
 }
