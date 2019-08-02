@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: on-failure
+    volumes:
+      - ./support/db-data:/var/lib/postgresql/data
+    env_file:
+      - ./support/postgres.env
+  app:
+    build: ./
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    env_file:
+      - ./support/postgres.env
