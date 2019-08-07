@@ -44,7 +44,7 @@ public class EventsController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Event> getEventsForInterval(@RequestParam LocalDateTime from,
                                             @RequestParam LocalDateTime to) {
         log.info("Requested events from: " + from + " to: " + to);
