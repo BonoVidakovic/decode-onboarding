@@ -3,21 +3,21 @@ package decode.onboarding.tasks.backend.service;
 import decode.onboarding.tasks.backend.model.Event;
 import decode.onboarding.tasks.backend.model.EventStatistics;
 import decode.onboarding.tasks.backend.service.impl.EventStatisticsServiceImpl;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class EventStatisticsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class EventStatisticsServiceTest {
 
     @Mock
     private EventService eventServiceMock;
@@ -26,7 +26,7 @@ public class EventStatisticsServiceTest {
     private EventStatisticsServiceImpl eventStatisticsService;
 
     @Test
-    public void testGetEventStatistics() {
+    void testGetEventStatistics() {
         LocalDateTime firstStart = LocalDateTime.of(2019, 1, 1, 0, 0, 0, 0);
         List<Event> events = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {

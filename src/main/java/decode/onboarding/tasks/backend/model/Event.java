@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Event {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long ID;
 
     @Column(name = "start")

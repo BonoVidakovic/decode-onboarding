@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findAll()
                 .stream()
                 .filter(event -> event.getOwner().equals(getCurrentUser()))
-                .filter(event -> event.getStartTime().isAfter(from))
+                .filter(event -> event.getStartTime().isAfter(from) || event.getStartTime().isEqual(from))
                 .filter(event -> event.getEndTime().isBefore(to))
                 .collect(Collectors.toList());
     }

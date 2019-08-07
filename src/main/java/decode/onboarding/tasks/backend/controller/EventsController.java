@@ -7,6 +7,7 @@ import decode.onboarding.tasks.backend.service.EventService;
 import decode.onboarding.tasks.backend.service.EventStatisticsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +45,9 @@ public class EventsController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/")
-    public List<Event> getEventsForInterval(@RequestParam LocalDateTime from,
-                                            @RequestParam LocalDateTime to) {
+    @GetMapping
+    public List<Event> getEventsForInterval(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         log.info("Requested events from: " + from + " to: " + to);
         return eventService.getEventsForInterval(from, to);
     }
@@ -55,6 +56,7 @@ public class EventsController {
      * Needlessly async, just playing with non-blocking
      */
     @GetMapping("statistics")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public DeferredResult<ResponseEntity<EventStatistics>> getEventStatistics(@RequestParam LocalDateTime from,
                                                                               @RequestParam LocalDateTime to) {
         DeferredResult<ResponseEntity<EventStatistics>> output = new DeferredResult<>();
