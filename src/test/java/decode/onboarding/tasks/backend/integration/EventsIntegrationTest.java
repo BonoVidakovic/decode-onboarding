@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.test.context.support.WithUserDetails;
@@ -30,10 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = {BackendApplication.class, InitializeDatabase.class})
 @AutoConfigureMockMvc
-@PropertySources({
-        @PropertySource("classpath:application-dev.properties"),
-        @PropertySource("classpath:application.properties")
-})
 class EventsIntegrationTest {
 
     @Autowired
