@@ -1,5 +1,6 @@
 package decode.onboarding.tasks.backend.model;
 
+import decode.onboarding.tasks.backend.config.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +32,14 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "")
     private List<Event> events;
+
+    @ManyToMany
+    @JoinTable(name = "USERS_ROLES",
+            joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
+    private Collection<Role> roles;
 
     public UserDetails asUserDetails() {
         User user = this;

@@ -24,8 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-//Pitati zašto ne radi kada je pokrenuto s drugim testovima (vjv kontext i veza na bazu jebu)
-
 @SpringBootTest(classes = {BackendApplication.class, InitializeDatabase.class})
 @AutoConfigureMockMvc
 class EventsIntegrationTest {
